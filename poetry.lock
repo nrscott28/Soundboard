@@ -28,5 +28,5 @@ test = ["numpy"]
 
 [metadata]
 lock-version = "2.1"
-python-versions = ">=3.13"
-content-hash = "3091132286bfb8551bab636e69c445cbd7986626e7851f60f20c36ea63aabaec"
+python-versions = ">=3.13,<4.0"
+content-hash = "345bab17ace9a0d5d7be580331aab9adfe93769de90718ea6e0ab122e22d926b"
