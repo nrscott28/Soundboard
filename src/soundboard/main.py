@@ -11,45 +11,19 @@ import wave
 
 #Modules
 import sound_devices as sd
-
-#Configuration
-InputName = "Microphone (PD100X Podcast Microphone)" 
-OutputName = "Voicemeeter AUX Input (VB-Audio Voicemeeter VAIO)"#"CABLE Input (VB-Audio Virtual Cable)"
-
-#As of right now this will only work on Windows.
-#AUDIO_API = 1 #MME
-AUDIO_API = 2 #WASAPI
-
-RATE = 48000
-CHUNK = 4096
-CHANNELS = 1
-FORMAT = pyaudio.paInt16
+import config
 
 def main():
     #Create Pyaudio instance
     p = pyaudio.PyAudio()
     
-    #Get input and output indexes
-    InputIndex = sd.getDeviceIndexByName(p, InputName)
-    OutputIndex = sd.getDeviceIndexByName(p, OutputName)
-    
-    wf = wave.open("Soundboard\sounds\wizard.wav", 'rb')
+    #create Input and Output streams
+    #in_stream = sd.openInputStream(p)
+    out_stream = sd.openOutputStream(p)
 
-    #Main Pyaudio loop
-    '''
-    in_stream = p.open(format=FORMAT, 
-                       channels=CHANNELS, 
-                       rate=RATE, 
-                       input=True, 
-                       input_device_index=InputIndex, 
-                       frames_per_buffer=CHUNK)
-    '''
+    #Test audio for output. Emulating pressing a soundboard button
+    wf = wave.open("sounds/wizard.wav", 'rb')
     
-    out_stream = p.open(format=FORMAT, 
-                        channels=CHANNELS, 
-                        rate=RATE, output=True, 
-                        output_device_index=OutputIndex, 
-                        frames_per_buffer=CHUNK)
 
     print("Routing active. Press Ctrl+C to stop.")
 
@@ -66,31 +40,16 @@ def main():
         out_stream.close()
     '''
     # Read data from the file and play it in chunks
-    data = wf.readframes(CHUNK)
+    data = wf.readframes(config.CHUNK)
     while len(data) > 0:
         out_stream.write(data)
-        data = wf.readframes(CHUNK)
+        data = wf.readframes(config.CHUNK)
     out_stream.stop_stream()
     out_stream.close()
     p.terminate()
     
     wf.close()
     
-   
-
-     #Get audio information
-    '''
-    p = pyaudio.PyAudio()
-
-    for i in range(p.get_device_count()):
-        info = p.get_device_info_by_index(i)
-        print(f"[{i}] {info['name']}")
-        print(f"     Default SR: {info['defaultSampleRate']}")
-        print(f"     Max Input Ch: {info['maxInputChannels']}")
-        print(f"     Max Output Ch: {info['maxOutputChannels']}")
-
-    p.terminate()
-    '''
 #Runnable Py file
 if __name__ == "__main__":
     main()

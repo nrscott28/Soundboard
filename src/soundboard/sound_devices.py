@@ -1,13 +1,16 @@
 #Dependencies
 import pyaudio
 
+#Modules
+import config
+
 #Get device index given the name of the device
 def getDeviceIndexByName(pa, name):
     pos = -1
 
     for i in range(pa.get_device_count()):
         info = pa.get_device_info_by_index(i)
-        if (info.get('name').lower() == name.lower()) and (info.get('hostApi') == AUDIO_API):
+        if (info.get('name').lower() == name.lower()) and (info.get('hostApi') == config.AUDIO_API):
             printDeviceInfo(pa, i)
             pos = i
     return pos
@@ -30,17 +33,19 @@ def showAllDeviceInfo(pyaudio_instance):
         printDeviceInfo(pyaudio_instance, i)
         
 
-def openInputStream(FORMAT, CHANNELS):
-    in_stream = p.open(format=FORMAT, 
-        channels=CHANNELS, 
-        rate=RATE, 
+def openInputStream(p):
+    in_stream = p.open(format=config.FORMAT, 
+        channels= config.IN_CHANNELS, 
+        rate=config.RATE, 
         input=True, 
-        input_device_index=InputIndex, 
-        frames_per_buffer=CHUNK)
+        input_device_index = getDeviceIndexByName(p, config.InputName), 
+        frames_per_buffer=config.CHUNK)
+    return in_stream
 
-def openOutputStream(Format, Channels, Rate, Output):
-    out_stream = p.open(format=FORMAT, 
-        channels=CHANNELS, 
-        rate=RATE, output=True, 
-        output_device_index=OutputIndex, 
-        frames_per_buffer=CHUNK)
+def openOutputStream(p):
+    out_stream = p.open(format=config.FORMAT, 
+        channels=config.OUT_CHANNELS, 
+        rate=config.RATE, output=True, 
+        output_device_index = getDeviceIndexByName(p, config.OutputName), 
+        frames_per_buffer=config.CHUNK)
+    return out_stream
