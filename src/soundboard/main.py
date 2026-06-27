@@ -10,8 +10,8 @@ import pyaudio
 import wave
 
 #Modules
-import sound_devices as sd
-import config
+import audio.sound_devices as sd
+import config.settings as config
 
 def main():
     #Create Pyaudio instance
@@ -22,7 +22,7 @@ def main():
     out_stream = sd.openOutputStream(p)
 
     #Test audio for output. Emulating pressing a soundboard button
-    wf = wave.open("sounds/wizard.wav", 'rb')
+    wf = wave.open("src\soundboard\\assets\sounds\wizard.wav", 'rb')
     
 
     print("Routing active. Press Ctrl+C to stop.")

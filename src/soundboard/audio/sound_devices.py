@@ -2,7 +2,7 @@
 import pyaudio 
 
 #Modules
-import config
+import config.settings as config
 
 #Get device index given the name of the device
 def getDeviceIndexByName(pa, name):
