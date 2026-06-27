@@ -27,7 +27,7 @@ def main():
 
     print("Routing active. Press Ctrl+C to stop.")
 
-    #Try Playing mic audio through VB Cable
+    #Play mic audio through VB Cable
     '''
     try:
         while True:
@@ -39,6 +39,7 @@ def main():
         in_stream.close()
         out_stream.close()
     '''
+    
     # Read data from the file and play it in chunks
     data = wf.readframes(config.CHUNK)
     while len(data) > 0:

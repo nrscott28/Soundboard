@@ -1,5 +1,5 @@
 #Dependencies
-import pyaudio
+import pyaudio 
 
 #Modules
 import config
