@@ -1,13 +1,14 @@
 #Dependencies
-import pyaudio 
-import wave as wf
+import sounddevice as sd
+import soundfile as sf 
+import wave
+
 #Modules
 import config.settings as config
 
 class AudioEngine: 
     #Initialize Audio Engine
     def __init__(self):
-        self._pa = pyaudio.PyAudio()
         self._device_index = None # None -> system default
 
 
@@ -23,23 +24,52 @@ class AudioEngine:
         return pos
 
     #Print device info given index
-    def printDeviceInfo(self, pyaudio_instance ,index):
-        info = pyaudio_instance.get_device_info_by_index(index)
+    def printDeviceInfo(self, index):
+        info = sd.query_devices(device=index)
             
-        print(f"Index: {info.get('index')}")
-        print(f"Name: {info.get('name')}")
-        print(f"API: {info.get('hostApi')}")
-        print(f"Input Channels: {info.get('maxInputChannels')}")
-        print(f"Output Channels: {info.get('maxOutputChannels')}")
-        print(f"Sample Rate: {info.get('defaultSampleRate')} \n")
+        print(f"Device Name: {info['name']}")
+        print(f"Max Input Channels: {info['max_input_channels']}")
+        print(f"Max Output Channels: {info['max_output_channels']}")
+        print(f"Default Sample Rate: {info['default_samplerate']}")
 
 
     #Prints out all audio device information to terminal using printDeviceInfo to display
     def showAllDeviceInfo(self, pyaudio_instance):
         for i in range(pyaudio_instance.get_device_count()):
             self.printDeviceInfo(pyaudio_instance, i)
-            
 
+
+    def play(self, file):
+        wf = wave.open(file, 'rb')
+        
+        # Read data from the file and play it in chunks
+        data = wf.readframes(config.CHUNK)
+        while len(data) > 0:
+            out_stream.write(data)
+            data = wf.readframes(config.CHUNK)
+        out_stream.stop_stream()
+        out_stream.close()
+        p.terminate()
+        
+        wf.close()
+
+    #Play mic audio through VB Cable
+    '''
+    try:
+        while True:
+            # Read from mic, write to VB-Cable
+            out_stream.write(in_stream.read(CHUNK, exception_on_overflow=False))
+    except KeyboardInterrupt:
+        print("Stopped.")
+    finally:
+        in_stream.close()
+        out_stream.close()
+    '''
+
+
+
+    #Might not need with sounddevice         
+'''
     def openInputStream(self, p):
         in_stream = p.open(format=config.FORMAT, 
             channels= config.IN_CHANNELS, 
@@ -56,15 +86,4 @@ class AudioEngine:
             output_device_index = self.getDeviceIndexByName(p, config.OutputName), 
             frames_per_buffer=config.CHUNK)
         return out_stream
-    
-    def play(self, file):
-        # Read data from the file and play it in chunks
-        data = wf.readframes(config.CHUNK)
-        while len(data) > 0:
-            out_stream.write(data)
-            data = wf.readframes(config.CHUNK)
-        out_stream.stop_stream()
-        out_stream.close()
-        p.terminate()
-        
-        wf.close()
+''' 
