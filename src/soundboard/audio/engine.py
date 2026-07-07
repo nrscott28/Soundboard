@@ -1,7 +1,7 @@
 #Dependencies
 import sounddevice as sd
 import soundfile as sf 
-import wave
+import threading
 
 #Modules
 import config.settings as config
@@ -35,55 +35,18 @@ class AudioEngine:
 
     #Prints out all audio device information to terminal using printDeviceInfo to display
     def showAllDeviceInfo(self, pyaudio_instance):
-        for i in range(pyaudio_instance.get_device_count()):
-            self.printDeviceInfo(pyaudio_instance, i)
+        devices = []
+        for i, dev in enumerate(sd.query_devices()):
+            if dev["max_output_channels"] > 0:
+                devices.append({"index": i, "name": dev["name"]})
+        print(devices)
 
 
-    def play(self, file):
-        wf = wave.open(file, 'rb')
-        
-        # Read data from the file and play it in chunks
-        data = wf.readframes(config.CHUNK)
-        while len(data) > 0:
-            out_stream.write(data)
-            data = wf.readframes(config.CHUNK)
-        out_stream.stop_stream()
-        out_stream.close()
-        p.terminate()
-        
-        wf.close()
+    #Creates thread so UI is responsive when play button is clicked
+    def play(self, filepath: str):
+        threading.Thread(target=self._play, args=(filepath,), daemon=True).start()
 
-    #Play mic audio through VB Cable
-    '''
-    try:
-        while True:
-            # Read from mic, write to VB-Cable
-            out_stream.write(in_stream.read(CHUNK, exception_on_overflow=False))
-    except KeyboardInterrupt:
-        print("Stopped.")
-    finally:
-        in_stream.close()
-        out_stream.close()
-    '''
-
-
-
-    #Might not need with sounddevice         
-'''
-    def openInputStream(self, p):
-        in_stream = p.open(format=config.FORMAT, 
-            channels= config.IN_CHANNELS, 
-            rate=config.RATE, 
-            input=True, 
-            input_device_index = self.getDeviceIndexByName(p, config.InputName), 
-            frames_per_buffer=config.CHUNK)
-        return in_stream
-
-    def openOutputStream(self, p):
-        out_stream = p.open(format=config.FORMAT, 
-            channels=config.OUT_CHANNELS, 
-            rate=config.RATE, output=True, 
-            output_device_index = self.getDeviceIndexByName(p, config.OutputName), 
-            frames_per_buffer=config.CHUNK)
-        return out_stream
-''' 
+    #Plays the audio
+    def _play(self, filepath: str):
+        data, samplerate = sf.read(filepath, dtype="int16")
+        sd.play(data, samplerate, device=self._device_index)
