@@ -6,16 +6,16 @@
 #####
 
 #Modules
-import soundboard.audio.engine as sd
-import config.settings as config
+#import config.settings 
 from audio.engine import AudioEngine
 def main():
 
     #Test audio for output. Emulating pressing a soundboard button
     #wf = wave.open("src\soundboard\\assets\sounds\wizard.wav", 'rb')
-    engine = AudioEngine
-
-    print("Routing active. Press Ctrl+C to stop.")
+    
+    engine = AudioEngine()
+    #engine.showAllDeviceInfo()
+    engine.play("src/soundboard/assets/sounds/wizard.wav")
 
     
     

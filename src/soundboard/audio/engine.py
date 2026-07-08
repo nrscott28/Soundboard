@@ -1,7 +1,9 @@
 #Dependencies
-import sounddevice as sd
-import soundfile as sf 
-import threading
+import sounddevice as sd            # Manages sound devices, playback, and streams
+import soundfile as sf              # Manages sound files
+import threading                    # Creates threads for each sound played
+from config.settings import *       # Imports all settings
+import os                           # Used to check if file exists
 
 #Modules
 import config.settings as config
@@ -9,6 +11,7 @@ import config.settings as config
 class AudioEngine: 
     #Initialize Audio Engine
     def __init__(self):
+        sd.default.device = OutputName
         self._device_index = None # None -> system default
 
 
@@ -34,19 +37,28 @@ class AudioEngine:
 
 
     #Prints out all audio device information to terminal using printDeviceInfo to display
-    def showAllDeviceInfo(self, pyaudio_instance):
+    def showAllDeviceInfo(self):
         devices = []
         for i, dev in enumerate(sd.query_devices()):
             if dev["max_output_channels"] > 0:
-                devices.append({"index": i, "name": dev["name"]})
-        print(devices)
+                print(f"Index: {i}")
+                print(f"Device: {dev}")
 
+    def setOutputDevice(self, index):
+        self._device_index = index
 
     #Creates thread so UI is responsive when play button is clicked
+    #  *** MP3 not supported by soundfile ***
     def play(self, filepath: str):
+        if not os.path.exists(filepath):
+            print(f"File not found: {filepath}")
+        return
         threading.Thread(target=self._play, args=(filepath,), daemon=True).start()
 
     #Plays the audio
     def _play(self, filepath: str):
-        data, samplerate = sf.read(filepath, dtype="int16")
-        sd.play(data, samplerate, device=self._device_index)
+        try: 
+            data, samplerate = sf.read(filepath, dtype="int16")
+            sd.play(data, samplerate, device=self._device_index)
+        except Exception as e:
+            print(f"Audio error playing {filepath}: {e}")

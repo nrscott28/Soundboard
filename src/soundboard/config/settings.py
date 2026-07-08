@@ -1,5 +1,4 @@
 #Dependencies
-import pyaudio
 
 #-----------[ Audio Settings ]-----------
 #Device Names
@@ -23,4 +22,4 @@ IN_CHANNELS = 1
 OUT_CHANNELS = 2
 
 #Audio Format
-FORMAT = pyaudio.paInt16
+#FORMAT = 
