@@ -14,16 +14,28 @@ class AudioEngine:
         self._device_index = None # None -> system default
 
 
-    #Get device index given the name of the device
-    def getDeviceIndexByName(self, pa, name):
-        pos = -1
+    #Get device index given the name of the device and the desired audio API
+    def getDeviceIndex(self, device_name, selected_api):
+        index = -1
+        target_api = None
+        
+        #Get hostapi index
+        for api in sd.query_hostapis():
+            if selected_api.lower() == api["name"].lower():
+                target_api = api["index"]
+        
+        if target_api is None: 
+            print(f"Error: Host API {selected_api} not found")
+            return None
 
-        for i in range(pa.get_device_count()):
-            info = pa.get_device_info_by_index(i)
-            if (info.get('name').lower() == name.lower()) and (info.get('hostApi') == settings.AUDIO_API):
-                self.printDeviceInfo(pa, i)
-                pos = i
-        return pos
+        #Find device with matching hostapi and name
+        for idx, dev in enumerate(sd.query_devices()):
+            if dev["name"].lower() == device_name.lower() and dev["hostapi"] == target_api:
+                return idx
+        
+        #Will continue if no matching device is found
+        print(f"Error: No device found with name {device_name}")
+        return None
 
     #Print device info given index
     def printDeviceInfo(self, index):
@@ -55,13 +67,19 @@ class AudioEngine:
 
     #Plays the audio
     def _play(self, filepath: str):
-        try: 
-            print("Playing...")
-
+        try:
             data, samplerate = sf.read(filepath, dtype="float32")
-            sd.play(data, samplerate, device=self._device_index)
-
-            print("Finished Playing")
-
+            
+            #Checks number of dimensions, which is the number of channels. Reshapes if it is one channel
+            if data.ndim == 1:
+                data = data.reshape(-1, 1)
+            
+            #Use Output Stream instead of play so theres more control over parameters
+            with sd.OutputStream(samplerate=samplerate, channels=data.shape[1],
+                                device=self._device_index) as stream:
+                stream.write(data)  # blocks until done, no sd.wait() needed
         except Exception as e:
             print(f"Audio error playing {filepath}: {e}")
+
+
+        

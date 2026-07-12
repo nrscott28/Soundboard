@@ -5,11 +5,10 @@
 InputName = "Microphone (PD100X Podcast Microphone)" 
 OutputName = "CABLE Input (VB-Audio Virtual Cable)" #"Voicemeeter AUX Input (VB-Audio Voicemeeter VAIO)"
 
-#As of right now this will only work on Windows.
+# *** As of right now this will only work on Windows. ***
+
 #Audio Api
-# 1: MME
-# 2: WASAPI
-AUDIO_API = 2 
+Audio_API = "WASAPI" 
 
 #Bitrate
 RATE = 48000

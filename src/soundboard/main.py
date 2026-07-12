@@ -6,7 +6,7 @@
 #####
 
 #Modules
-#import config.settings 
+from config import settings
 from audio.engine import AudioEngine
 
 def main():
@@ -16,8 +16,10 @@ def main():
     
     engine = AudioEngine()
     #engine.showAllDeviceInfo()
-    engine.play("soundboard/assets/sounds/wizard.wav")
-
+    #engine.play("soundboard/assets/sounds/wizard.wav")
+    index = engine.getDeviceIndex(settings.OutputName, settings.Audio_API)
+    print(f"Index: {index}, Name: {settings.OutputName}, Host API: {settings.Audio_API}")
+    
     
     
 #Runnable Py file
