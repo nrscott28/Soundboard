@@ -8,6 +8,7 @@
 #Modules
 #import config.settings 
 from audio.engine import AudioEngine
+
 def main():
 
     #Test audio for output. Emulating pressing a soundboard button
@@ -15,7 +16,7 @@ def main():
     
     engine = AudioEngine()
     #engine.showAllDeviceInfo()
-    engine.play("src/soundboard/assets/sounds/wizard.wav")
+    engine.play("soundboard/assets/sounds/wizard.wav")
 
     
     

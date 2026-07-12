@@ -1,17 +1,16 @@
 #Dependencies
-import sounddevice as sd            # Manages sound devices, playback, and streams
-import soundfile as sf              # Manages sound files
-import threading                    # Creates threads for each sound played
-from config.settings import *       # Imports all settings
-import os                           # Used to check if file exists
+import sounddevice as sd                # Manages sound devices, playback, and streams
+import soundfile as sf                  # Manages sound files
+import threading                        # Creates threads for each sound played
+import os                               # Used to check if file exists
 
 #Modules
-import config.settings as config
+from config import settings
 
 class AudioEngine: 
     #Initialize Audio Engine
     def __init__(self):
-        sd.default.device = OutputName
+        sd.default.device = settings.OutputName
         self._device_index = None # None -> system default
 
 
@@ -21,7 +20,7 @@ class AudioEngine:
 
         for i in range(pa.get_device_count()):
             info = pa.get_device_info_by_index(i)
-            if (info.get('name').lower() == name.lower()) and (info.get('hostApi') == config.AUDIO_API):
+            if (info.get('name').lower() == name.lower()) and (info.get('hostApi') == settings.AUDIO_API):
                 self.printDeviceInfo(pa, i)
                 pos = i
         return pos
@@ -52,13 +51,17 @@ class AudioEngine:
     def play(self, filepath: str):
         if not os.path.exists(filepath):
             print(f"File not found: {filepath}")
-        return
-        threading.Thread(target=self._play, args=(filepath,), daemon=True).start()
+        return threading.Thread(target=self._play, args=(filepath,), daemon=True).start()
 
     #Plays the audio
     def _play(self, filepath: str):
         try: 
-            data, samplerate = sf.read(filepath, dtype="int16")
+            print("Playing...")
+
+            data, samplerate = sf.read(filepath, dtype="float32")
             sd.play(data, samplerate, device=self._device_index)
+
+            print("Finished Playing")
+
         except Exception as e:
             print(f"Audio error playing {filepath}: {e}")
