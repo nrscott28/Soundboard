@@ -98,6 +98,37 @@ files = [
 pycparser = {version = "*", markers = "implementation_name != \"PyPy\""}
 
 [[package]]
+name = "customtkinter"
+version = "6.0.0"
+description = "Create modern looking GUIs with Python"
+optional = false
+python-versions = ">=3.7"
+groups = ["main"]
+files = [
+    {file = "customtkinter-6.0.0-py3-none-any.whl", hash = "sha256:704fcbf1d2fca06bd7881b0afacfae72aed9864c9b6de2870e632e55eb3a0456"},
+    {file = "customtkinter-6.0.0.tar.gz", hash = "sha256:c782df167bc64ab3fc3140286df06967ac2de4dcc97dd5958426fe9c1a98057b"},
+]
+
+[package.dependencies]
+darkdetect = "*"
+packaging = "*"
+
+[[package]]
+name = "darkdetect"
+version = "0.8.0"
+description = "Detect OS Dark Mode from Python"
+optional = false
+python-versions = ">=3.6"
+groups = ["main"]
+files = [
+    {file = "darkdetect-0.8.0-py3-none-any.whl", hash = "sha256:a7509ccf517eaad92b31c214f593dbcf138ea8a43b2935406bbd565e15527a85"},
+    {file = "darkdetect-0.8.0.tar.gz", hash = "sha256:b5428e1170263eb5dea44c25dc3895edd75e6f52300986353cd63533fe7df8b1"},
+]
+
+[package.extras]
+macos-listener = ["pyobjc-framework-Cocoa ; platform_system == \"Darwin\""]
+
+[[package]]
 name = "numpy"
 version = "2.5.0"
 description = "Fundamental package for array computing in Python"
@@ -149,6 +180,18 @@ files = [
     {file = "numpy-2.5.0-cp314-cp314t-win_amd64.whl", hash = "sha256:f7e5fa4382967ae6548bd2f174219afb908e294b0d5f625af01166edd5f7d9aa"},
     {file = "numpy-2.5.0-cp314-cp314t-win_arm64.whl", hash = "sha256:016623417bb330d719d579daf2d6b9a01ddc52e41a9ed61a47f39fde46dcd865"},
     {file = "numpy-2.5.0.tar.gz", hash = "sha256:5a129578019311b6e56bdd714250f19b518f7dceeeb8d1af5490f4942d3f891c"},
+]
+
+[[package]]
+name = "packaging"
+version = "26.2"
+description = "Core utilities for Python packages"
+optional = false
+python-versions = ">=3.8"
+groups = ["main"]
+files = [
+    {file = "packaging-26.2-py3-none-any.whl", hash = "sha256:5fc45236b9446107ff2415ce77c807cee2862cb6fac22b8a73826d0693b0980e"},
+    {file = "packaging-26.2.tar.gz", hash = "sha256:ff452ff5a3e828ce110190feff1178bb1f2ea2281fa2075aadb987c2fb221661"},
 ]
 
 [[package]]
@@ -225,4 +268,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.13,<4.0"
-content-hash = "0603c7f1a80a10cf95e163002b0c08eb2ab6a252b918328ad16859ef5279265a"
+content-hash = "2c2c75fd94b1011eef99ab8211b70447778822e447eec59b52d29db30fcfac0a"

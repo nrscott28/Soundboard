@@ -6,19 +6,23 @@
 #####
 
 #Modules
-from config import settings
-from audio.engine import AudioEngine
-
+#from config import settings
+#from audio.engine import AudioEngine
+from app import SoundboardApp
 def main():
+    #Create app
+    app = SoundboardApp()
+    app.mainloop()
+
 
     #Test audio for output. Emulating pressing a soundboard button
     #wf = wave.open("src\soundboard\\assets\sounds\wizard.wav", 'rb')
     
-    engine = AudioEngine()
+    #engine = AudioEngine()
     #engine.showAllDeviceInfo()
     #engine.play("soundboard/assets/sounds/wizard.wav")
-    index = engine.getDeviceIndex(settings.OutputName, settings.Audio_API)
-    print(f"Index: {index}, Name: {settings.OutputName}, Host API: {settings.Audio_API}")
+    #index = engine.getDeviceIndex(settings.OutputName, settings.Audio_API)
+    #print(f"Index: {index}, Name: {settings.OutputName}, Host API: {settings.Audio_API}")
     
     
     

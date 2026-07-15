@@ -22,3 +22,8 @@ OUT_CHANNELS = 2
 
 #Audio Format
 #FORMAT = 
+
+
+#-----------[ App Settings ]-----------
+title = "Soundboard"
+window_size = "1000x800"
