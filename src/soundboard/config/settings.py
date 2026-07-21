@@ -27,3 +27,10 @@ OUT_CHANNELS = 2
 #-----------[ App Settings ]-----------
 title = "Soundboard"
 window_size = "1000x800"
+
+
+
+
+#-----------[ Settings Window Settings ]-----------
+settings_title = "Settings"
+settings_size = "600x600"
