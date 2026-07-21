@@ -10,7 +10,8 @@ requires-python = ">=3.13,<4.0"
 dependencies = [
     "sounddevice (>=0.5.5,<0.6.0)",
     "soundfile (>=0.14.0,<0.15.0)",
-    "customtkinter (>=6.0.0,<7.0.0)"
+    "customtkinter (>=6.0.0,<7.0.0)",
+    "pillow (>=12.3.0,<13.0.0)"
 ]
 
 [tool.poetry]

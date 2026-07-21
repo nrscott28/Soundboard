@@ -1,5 +1,6 @@
 #Dependencies
 import customtkinter as ctk
+from PIL import Image
 
 from audio.engine import AudioEngine
 from config import settings
@@ -15,7 +16,7 @@ class SoundboardApp(ctk.CTk):
         self.engine = AudioEngine()
 
         #Components  
-        
+        button = 
 
         #Close window
         self.protocol("WM_DELETE_WINDOW", self._on_close)
