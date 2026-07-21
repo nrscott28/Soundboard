@@ -82,4 +82,6 @@ class AudioEngine:
             print(f"Audio error playing {filepath}: {e}")
 
 
-        
+    #Call before closing application. Stops any running threads
+    def stop_all(self):
+        sd.stop()
