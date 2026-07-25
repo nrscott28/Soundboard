@@ -3,7 +3,7 @@ import customtkinter as ctk
 
 from config import settings
 
-class SettingsWindow(ctk.CTkTopLevel):
+class SettingsWindow(ctk.CTkToplevel):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.title(settings.settings_title)
