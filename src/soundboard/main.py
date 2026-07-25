@@ -9,9 +9,11 @@
 #from config import settings
 #from audio.engine import AudioEngine
 from app import SoundboardApp
+
 def main():
     #Create app
     app = SoundboardApp()
+
     app.mainloop()
 
 

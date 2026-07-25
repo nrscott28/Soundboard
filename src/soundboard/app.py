@@ -5,6 +5,11 @@ from PIL import Image
 from audio.engine import AudioEngine
 from config import settings
 from ui.settings_window import SettingsWindow
+
+#Sets theme
+ctk.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
+ctk.set_default_color_theme("src/soundboard/ui/themes/red.json")
+
 class SoundboardApp(ctk.CTk):
     def __init__(self):
         super().__init__()
@@ -22,9 +27,11 @@ class SoundboardApp(ctk.CTk):
         self.settings_btn = ctk.CTkButton(self, text="Open Settings", command=self.open_settings)
         self.settings_btn.grid(row=0, column=0, padx=10, pady=10)
 
+
+
+
         #Close window
         self.protocol("WM_DELETE_WINDOW", self._on_close)
-
 
     def open_settings(self):
         if self.settings_window is None or not self.settings_window.winfo_exists():
