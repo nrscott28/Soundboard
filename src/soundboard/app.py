@@ -21,7 +21,6 @@ class SoundboardApp(ctk.CTk):
         self.grid_rowconfigure(0, weight=0)
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(1, weight=1)
-        self.grid_columnconfigure(1, weight=1)
 
         
 
@@ -37,7 +36,7 @@ class SoundboardApp(ctk.CTk):
         buttons_frame = ctk.CTkFrame(self, corner_radius=20)
         buttons_frame.grid(row=1, column=0, sticky="nsew", padx=10, pady=10)
         
-        #Settings Window
+        #Settings Popup Window
         self.settings_window = None   
         self.settings_btn = ctk.CTkButton(master=options_frame, text="Settings", command=self.open_settings)
         self.settings_btn.grid(row=0, column=0, padx=10, pady=10)
