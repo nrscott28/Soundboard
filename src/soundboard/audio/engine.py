@@ -5,7 +5,7 @@ import threading                        # Creates threads for each sound played
 import os                               # Used to check if file exists
 
 #Modules
-from config import settings
+from config.settings import settings
 
 class AudioEngine: 
     #Initialize Audio Engine

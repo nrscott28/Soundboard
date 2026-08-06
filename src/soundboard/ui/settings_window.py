@@ -1,7 +1,7 @@
 #Dependencies
 import customtkinter as ctk
 
-from config import settings
+from config.settings import settings
 
 class SettingsWindow(ctk.CTkToplevel):
     def __init__(self, *args, **kwargs):

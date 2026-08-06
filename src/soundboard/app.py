@@ -3,7 +3,7 @@ import customtkinter as ctk
 from PIL import Image
 
 from audio.engine import AudioEngine
-from config import settings
+from config.settings import settings
 from ui.settings_window import SettingsWindow
 
 #Sets theme
@@ -18,6 +18,7 @@ class SoundboardApp(ctk.CTk):
         self.title(settings.title)
         self.geometry(settings.window_size)
 
+        #Set frames to fill screen
         self.grid_rowconfigure(0, weight=0)
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(1, weight=1)
