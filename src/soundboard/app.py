@@ -5,7 +5,7 @@ from PIL import Image
 from audio.engine import AudioEngine
 from config.settings import settings
 from ui.settings_window import SettingsWindow
-
+from ui.soundbutton import SoundButton
 #Sets theme
 ctk.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
 ctk.set_default_color_theme("src/soundboard/ui/themes/red.json")
@@ -36,6 +36,11 @@ class SoundboardApp(ctk.CTk):
         # Buttons Frame
         buttons_frame = ctk.CTkFrame(self, corner_radius=20)
         buttons_frame.grid(row=1, column=0, sticky="nsew", padx=10, pady=10)
+
+        # Sound Buttons
+        sound_btn = SoundButton(buttons_frame, "Test")
+        sound_btn.grid(row=0,column=0, padx = settings.buttonPadding, pady = settings.buttonPadding)
+        
         
         #Settings Popup Window
         self.settings_window = None   

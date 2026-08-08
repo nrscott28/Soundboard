@@ -29,7 +29,8 @@ class Settings(BaseModel):
 
 
     #-----------[ Button Settings ]-----------
-    buttonSize: int = 80
+    buttonSize: int = 100
+    buttonPadding: int = 10
 
     #-----------[ Settings Window Settings ]-----------
     settings_title: str = "Settings"
