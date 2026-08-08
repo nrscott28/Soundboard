@@ -4,7 +4,7 @@ from pydantic import BaseModel
 class Settings(BaseModel):
     # Device Names
     InputName: str = "Microphone (PD100X Podcast Microphone)" 
-    OutputName: str = "CABLE Input (VB-Audio Virtual Cable)" #"Voicemeeter AUX Input (VB-Audio Voicemeeter VAIO)"
+    OutputName: str = "CABLE Input (VB-Audio Virtual Cable)" #"Voicemeeter AUX Input (VB-Audio Voicemeeter VAIO)" 
 
     # *** As of right now this will only work on Windows. ***
 
@@ -29,7 +29,7 @@ class Settings(BaseModel):
 
 
     #-----------[ Button Settings ]-----------
-
+    buttonSize: int = 80
 
     #-----------[ Settings Window Settings ]-----------
     settings_title: str = "Settings"
