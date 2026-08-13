@@ -23,8 +23,6 @@ class SoundboardApp(ctk.CTk):
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(1, weight=1)
 
-        
-
         self.engine = AudioEngine()
     
         #   Components  
@@ -37,10 +35,20 @@ class SoundboardApp(ctk.CTk):
         buttons_frame = ctk.CTkFrame(self, corner_radius=20)
         buttons_frame.grid(row=1, column=0, sticky="nsew", padx=10, pady=10)
 
+
+
         # Sound Buttons
         sound_btn = SoundButton(buttons_frame, "Test")
         sound_btn.grid(row=0,column=0, padx = settings.buttonPadding, pady = settings.buttonPadding)
         
+        # Sound Buttons
+        sound_btn2 = SoundButton(buttons_frame, "Test")
+        sound_btn2.grid(row=0,column=1, padx = settings.buttonPadding, pady = settings.buttonPadding)
+        sound_btn3 = SoundButton(buttons_frame, "Test")
+        sound_btn3.grid(row=1,column=0, padx = settings.buttonPadding, pady = settings.buttonPadding)
+        sound_btn4 = SoundButton(buttons_frame, "Test")
+        sound_btn4.grid(row=1,column=1, padx = settings.buttonPadding, pady = settings.buttonPadding)
+
         
         #Settings Popup Window
         self.settings_window = None   
@@ -57,6 +65,9 @@ class SoundboardApp(ctk.CTk):
             self.settings_window.focus()  # if window exists focus it
         
 
+    def populate_buttons(self, button_frame):
+        pass
+    
     #Handles closing window
     def _on_close(self):
         self.engine.stop_all()

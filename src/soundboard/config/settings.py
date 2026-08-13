@@ -6,6 +6,8 @@ class Settings(BaseModel):
     InputName: str = "Microphone (PD100X Podcast Microphone)" 
     OutputName: str = "CABLE Input (VB-Audio Virtual Cable)" #"Voicemeeter AUX Input (VB-Audio Voicemeeter VAIO)" 
 
+    SoundsPath: str = ""
+
     # *** As of right now this will only work on Windows. ***
 
     #Audio Api
@@ -26,6 +28,8 @@ class Settings(BaseModel):
     #-----------[ App Settings ]-----------
     title: str = "Soundboard"
     window_size: str = "1000x800"
+
+    
 
 
     #-----------[ Button Settings ]-----------
