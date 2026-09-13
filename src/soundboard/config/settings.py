@@ -28,8 +28,7 @@ class Settings(BaseModel):
     #-----------[ App Settings ]-----------
     title: str = "Soundboard"
     window_size: str = "1000x800"
-
-    
+    corner_radius: int = 20
 
 
     #-----------[ Button Settings ]-----------
