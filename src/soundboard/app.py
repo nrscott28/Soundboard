@@ -36,18 +36,12 @@ class SoundboardApp(ctk.CTk):
         buttons_frame.grid(row=1, column=0, sticky="nsew", padx=10, pady=10)
 
 
+        # TODO: Add list to hold sound buttons and populate them dynamically based on settings or configuration
+
 
         # Sound Buttons
         sound_btn = SoundButton(buttons_frame, "Test")
         sound_btn.grid(row=0,column=0, padx = settings.buttonPadding, pady = settings.buttonPadding)
-        
-        # Sound Buttons
-        sound_btn2 = SoundButton(buttons_frame, "Test")
-        sound_btn2.grid(row=0,column=1, padx = settings.buttonPadding, pady = settings.buttonPadding)
-        sound_btn3 = SoundButton(buttons_frame, "Test")
-        sound_btn3.grid(row=1,column=0, padx = settings.buttonPadding, pady = settings.buttonPadding)
-        sound_btn4 = SoundButton(buttons_frame, "Test")
-        sound_btn4.grid(row=1,column=1, padx = settings.buttonPadding, pady = settings.buttonPadding)
 
         
         #Settings Popup Window
