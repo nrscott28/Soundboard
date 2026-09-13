@@ -9,9 +9,7 @@ class SoundButton(ctk.CTkButton):
             master=master,
             width=width,
             height=height,
-            text=text,
+            text=text
         )
-
-
 
         
