@@ -1,2 +1,14 @@
 #### Notes ####
 
+Soundboard needs to be made up of different buttons with sounds in each one
+
+Current architecture thought #1: 
+Sounds saved in sound.py class
+sounds added based on what sounds were added before and pulled from json, and added into either a list of sounds in a separate class or 
+list of buttons generated from the sound list
+
+should just make a list of buttons in a new class. the button class will hold a sound that plays since each has the same functionality, and the list will be of buttons
+
+Also need to add a button to add new sounds, determine how I am going to display buttons and how big the grid should be, and right click buttons to delete them or have a pop up menu
+
+maybe later add a way to drag and drop them in new order? 
